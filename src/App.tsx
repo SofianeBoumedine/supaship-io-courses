@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import AllPosts from './AllPosts'
-import Welcome from './Welcome'
+import Welcome, { welcomeLoader } from './Welcome'
 import MessageBoard from './MessageBoard'
 import PostView from './PostView'
 import NavBar from './NavBar'
@@ -30,8 +30,9 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "bienvenue",
+        path: "welcome",
         element: <Welcome />,
+        loader: welcomeLoader,
         children: [],
       }
     ],

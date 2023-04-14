@@ -58,3 +58,7 @@ export default function Login(){
         </>
     );
 }
+
+export const setReturnPath = () => {
+    localStorage.setItem("returnPath", window.location.pathname);
+}
