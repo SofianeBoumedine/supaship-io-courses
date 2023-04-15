@@ -1,1 +1,1 @@
-truncate table auth.users cascade
+truncate table auth.users cascade;
