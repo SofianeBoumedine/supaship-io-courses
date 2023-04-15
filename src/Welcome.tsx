@@ -20,6 +20,7 @@ export async function welcomeLoader(){
     if(data?.username){
         return redirect("/");
     }
+    return null;
 }
 
 export default function Welcome(){
@@ -48,6 +49,7 @@ export default function Welcome(){
                     ])
                     .then(({error}) => {
                         if(error){
+                            console.log(error);
                             setServerError(`Nom d'utilisateur "${userName}" est déjà pris`);
                         } else {
                             const target = localStorage.getItem("returnPath") || "/";
@@ -90,7 +92,7 @@ function validateUsername(username: string): string | undefined {
         return "Username is required";
     }
     const regex = /^[a-zA-Z0-9_]+$/;
-    if(username.length<14) {
+    if(username.length<4) {
         return "Username must be at least 4 characters long";
     }
     if(username.length>14) {

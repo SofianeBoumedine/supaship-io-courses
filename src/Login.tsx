@@ -1,4 +1,4 @@
-import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
+import { Auth } from "@supabase/auth-ui-react";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./App";
 import Dialog from "./Dialog";
@@ -41,7 +41,6 @@ export default function Login(){
                 <>
                     <Auth supabaseClient={supaClient}
                         appearance={{
-                            theme: ThemeSupa,
                             className:{
                                 container: "login-form-container",
                                 label: "login-form-label",
