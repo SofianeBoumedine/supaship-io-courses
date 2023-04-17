@@ -9,13 +9,15 @@ import MessageBoard from "./MessageBoard";
 import PostView from "./PostView";
 import NavBar from "./NavBar";
 import { SupashipUserInfo, useSession } from "./use-session";
+import Home from "./Home";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <Layout />,
     children: [
-      {path:"", element: <MessageBoard />},
+      {path:"", element: <Home />},
+      {path:"/", element: <Home />},
       {
         path: "message-board",
         element: <MessageBoard />,

@@ -1,4 +1,4 @@
-import test, { expect, Page } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 import {
   createComment,
   createPost,
@@ -33,7 +33,7 @@ test.describe("Message Board", () => {
       browser,
     }) => {
       const otherUser = await browser.newPage();
-      otherUser.goto("http://locahost:1337");
+      otherUser.goto("http://localhost:1337");
       await signUp(otherUser, testUserEmail, testUserPassword, testUserName);
       const post = await createPost(otherUser, "test post", "test contents");
       await post.click();

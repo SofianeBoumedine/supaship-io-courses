@@ -9,12 +9,22 @@ import { timeAgo } from "./time-ago";
 import { UpVote } from "./UpVote";
 import { usePostScore } from "./use-post-score";
 
+
+interface PostData {
+    id: string;
+    title: string;
+    score: number;
+    username: string;
+    user_id: string;
+}
+
 export default function AllPosts() {
-    const {session } = useContext(UserContext);
+    const { session } = useContext(UserContext);
     const {pageNumber} = useParams();
     const [bumper, setBumper] = useState(0);
     const [posts, setPosts] = useState<GetPostsResponse[]>([]);
     const [myVotes, setMyVotes] = useState<Record<string, "up" | "down" | undefined>>({});
+    const [totalPages, setTotalPages] = useState(0);
     useEffect(()=>{
         const queryPageNumber = pageNumber ? +pageNumber : 1;
         supaClient.rpc("get_posts", {page_number: queryPageNumber}).select("*").then(({data})=>{
@@ -32,7 +42,10 @@ export default function AllPosts() {
                 });
             }
         });
-    }, [])
+        supaClient.from("posts").select("*", {count: "exact", head: true}).filter("path", "eq", "root").then(({count})=>{
+            count == null ? 0 : setTotalPages(Math.ceil(count/10));
+        })
+    }, [session, bumper, pageNumber])
     return (
         <>
         {session && (
@@ -95,7 +108,7 @@ function Post({ postData, myVote, onVoteSuccess} : {
                 }}
                 />
             </div>
-            <Link to={`/post/${postData.id}`} className="flex-auto">
+            <Link to={`/message-board/post/${postData.id}`} className="flex-auto">
                 <p className="mt-4">
                     Posted By {postData.username} {timeAgo((postData as any).created_at)}{""}
                     ago

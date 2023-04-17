@@ -36,7 +36,7 @@ export function UpVote(
         data-e2e={`${direction}vote`}
         data-filled={filled}
         >
-            <p>+</p>
+            <p>{direction==="down" ? "-" : "+"}</p>
         </button>
     )
 }

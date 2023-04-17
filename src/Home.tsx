@@ -2,11 +2,9 @@ import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import AllPosts from "./AllPosts";
 import { UserContext } from "./App";
-import { CreatePost } from "./CreatePost";
 import Login from "./Login";
-import { PostView } from "./Post";
 
-export default function MessageBoard(){
+export default function Home(){
     const userProfile = useContext(UserContext);
     return (
         <div className="message-board-container">
@@ -16,9 +14,7 @@ export default function MessageBoard(){
             </Link>
             {userProfile.session ? (
                 <>
-                    {/* <CreatePost/> */}
-                    {/* <PostView/> */}
-                    {/* <AllPosts/> */}
+                <AllPosts/>
                 </>
             ) : (
                 <h2 className="message-board-login-message" data-e2e="message-board-login">

@@ -43,4 +43,6 @@
 
 #auth-sign-up > div > button {
   color: green !important;
+  background-color: white !important;
 }
+

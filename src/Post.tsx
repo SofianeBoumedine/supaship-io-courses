@@ -19,6 +19,7 @@ export interface Post {
     score: number;
     created_at: string;
     path: string;
+    // comments: Comment[];
 }
 
 export interface Comment {
@@ -31,7 +32,7 @@ export interface Comment {
     comments: Comment[];
 }
 
-interface PostDetailData {
+export interface PostDetailData {
     post: GetSinglePostWithCommentResponse | null;
     comments: GetSinglePostWithCommentResponse[];
     myVotes?: Record<string, "up" | "down" | undefined>;
@@ -46,6 +47,7 @@ export async function getPostDetails({
 }): Promise<PostDetailData | undefined> {
     const {data, error} = await supaClient
     .rpc("get_single_post_with_comments", {post_id: postId})
+    // .rpc("get_posts", {post_id: postId})
     .select("*");
     if(error || !data || data.length === 0) {
         throw new Error("Post not found");
@@ -108,7 +110,7 @@ export function PostView() {
     );
 }
 
-function PostPresentation({
+export function PostPresentation({
     postDetailData,
     userContext,
     setBumper,
@@ -358,7 +360,7 @@ function CreateComment({
     )
 }
 
-function unsortedCommentsToNested(
+export function unsortedCommentsToNested(
     comments: GetSinglePostWithCommentResponse[]
 ): Comment[] {
     const commentMap = comments.reduce((acc, comment) => {

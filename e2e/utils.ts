@@ -74,7 +74,7 @@ export async function login(
 }
 
 export async function createPost(page: Page, title: string, contents: string){
-    page.goto("http://127.0.0.1:1337/1");
+    page.goto("http://127.0.0.1:1337/message-board/1");
     const postTitleInput = page.locator(`input[name="title"]`)
     const postContentsInput = page.locator(`textarea[name="contents"]`);
     const postSubmitButton = page.locator(`button[type="submit"]`);
